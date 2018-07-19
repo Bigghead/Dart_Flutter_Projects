@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 
 class ButtonRow extends StatelessWidget {
 
-  final List<int> _buttons;
+  final List _buttons;
+  final calculate;
 
-  ButtonRow(this._buttons);
+  ButtonRow(this._buttons, this.calculate){
+    print(_buttons);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,12 +17,14 @@ class ButtonRow extends StatelessWidget {
           children: _buttons.map( (button) {
             return Expanded(
               child: MaterialButton(
-                    height: 100.0,
-                    child: new Text("8",
-                    style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 24.0)),
+                    height: 110.0,
+                    child: Text(button.toString(),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24.0)),
                     textColor: Colors.black,
                     color: Colors.grey[100],
-                    onPressed: (){},
+                    onPressed: (){
+                      calculate(button.toString());
+                    },
                   ),
             );
           } ).toList(),

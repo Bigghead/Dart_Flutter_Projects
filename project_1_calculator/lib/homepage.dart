@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import './button-row.dart';
+
 
 class HomePage extends StatefulWidget {
 
@@ -14,7 +16,10 @@ class _HomePageState extends State<HomePage> {
 
   int totalValue = 0;
   String currentCal = '';
-  List buttons = [ [7, 8, 9, '+'] ];
+  List buttons = [ [ 7, 8, 9, '+' ], 
+                   [ 4, 5, 6, '-' ],
+                   [ 1, 2, 3, '*' ],
+                   [ 'C', 0, '=', '/'] ];
 
   @override
     void initState() {
@@ -46,8 +51,22 @@ class _HomePageState extends State<HomePage> {
                 textAlign: TextAlign.right,
               ),
             ),
+
+            Column(
+              children: buttons.map( ( button ) {
+                return ButtonRow(button, calculate);
+              } ).toList(),
+            ),
+
+            BottomAppBar(
+              child: Text(''),
+            )
           ],
         )
       );
     }
+
+  calculate( String value) {
+    print(value);
+  }
 }
