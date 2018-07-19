@@ -6,7 +6,6 @@ class ButtonRow extends StatelessWidget {
   final printValue;
 
   ButtonRow(this._buttons, this.printValue){
-    print(_buttons);
   }
 
   @override
@@ -23,7 +22,7 @@ class ButtonRow extends StatelessWidget {
                     textColor: Colors.black,
                     color: Colors.grey[100],
                     onPressed: (){
-                      printValue(button.toString());
+                      printValue(button);
                     },
                   ),
             );

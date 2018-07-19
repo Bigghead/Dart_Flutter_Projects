@@ -14,19 +14,16 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
+  int    _value1     = 0;
+  int    _value2     = 0;
   int    _totalValue = 0;
   String _currentVal = '0';
-  List   _buttons = [ [ 7, 8, 9, '+' ], 
-                   [ 4, 5, 6, '-' ],
-                   [ 1, 2, 3, '*' ],
-                   [ 'C', 0, '=', '/'] ];
-  Map    _operands = {
-    '+': true,
-    '-': true,
-    '*': true,
-    '/': true,
-  };
-  // String  _currentOperand = '';
+  List   _buttons    = [ [ 7, 8, 9, '+' ], 
+                      [ 4, 5, 6, '-' ],
+                      [ 1, 2, 3, '*' ],
+                      [ 'C', 0, '=', '/'] 
+                    ];
+  String _currentOperand;
 
   @override
     void initState() {
@@ -73,22 +70,69 @@ class _HomePageState extends State<HomePage> {
       );
     }
 
-  void printValue( String value ) {
+
+  void printValue( value ) {
     print(value);
 
-    setState(() {
-      _currentVal = _currentVal == '0' && !_operands.containsKey(value)
-                        ? value + ''
-                        : _currentVal + value + '';
+    // if value is a number, and no operand, set currentTotal to value
+    // if operand, set operand to operand
+    // if value is a number and operand, set total to value
+    // if value1, 2, and operand , calculate
+    if( value is int ){
+      if( _currentOperand == null ) {
+        setState(() {
+                  _value1 = int.parse(_value1.toString() + value.toString());
+                  print('value 1 ' + _value1.toString());
+                });
+      } else {
+        setState(() {
+                  _value2 = int.parse(_value2.toString() + value.toString());
+                  print('value 2 ' + _value2.toString());
+                });
+      }
 
-    });
-    print(_currentVal);
+      setState(() {
+              _currentVal = _currentVal == '0' 
+                            ? _currentVal = value.toString() + ''
+                            :_currentVal = _currentVal + value.toString() + '';
+            });
+
+    } else {
+      setState(() {
+              _currentOperand = value;
+              _currentVal = _currentVal == '0'
+                              ? '0'
+                              : _currentVal + value + '';
+              _value1 = ( _value1 > 0 && _value2 > 0 ) 
+                            ? calculate(_value1, value, _value2)
+                            : _value1;
+              _value2 = 0;
+            });
+    }
   }
 
-  calculate() {
-    List allValues = _currentVal.split(' ');
-    allValues.forEach( ( val ) {
-      
-    });
+
+  int calculate( int total, String operand, int current ) {
+    int newValue = 0;
+    setState(() {
+          switch (operand) {
+            case '+':
+              newValue = total + current;
+              break;
+            case '-':
+              newValue = total - current;
+              break;
+            case '*':
+              newValue = total * current;
+              break;
+            case '/':
+              newValue = (total / current).round();
+              break;
+            default:
+          }
+        });
+    
+    print(newValue);
+    return newValue;
   }
 }
