@@ -73,9 +73,8 @@ class _HomePageState extends State<HomePage> {
 
   void printValue( value ) {
 
-    if( value == '=' ) {
-      return getTotal();
-    }
+    if( value == '=' ) return getTotal();
+    if( value == 'C' ) return reset();
     
     if( value is int ){
       if( _currentOperand == null ) {
