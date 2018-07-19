@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+
 class HomePage extends StatefulWidget {
 
   @override
@@ -13,6 +14,7 @@ class _HomePageState extends State<HomePage> {
 
   int totalValue = 0;
   String currentCal = '';
+  List buttons = [ [7, 8, 9, '+'] ];
 
   @override
     void initState() {
