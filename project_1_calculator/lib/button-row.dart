@@ -5,8 +5,7 @@ class ButtonRow extends StatelessWidget {
   final List _buttons;
   final printValue;
 
-  ButtonRow(this._buttons, this.printValue){
-  }
+  ButtonRow(this._buttons, this.printValue);
 
   @override
   Widget build(BuildContext context) {

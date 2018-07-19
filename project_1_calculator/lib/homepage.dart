@@ -19,10 +19,10 @@ class _HomePageState extends State<HomePage> {
   int    _totalValue = 0;
   String _currentVal = '0';
   List   _buttons    = [ [ 7, 8, 9, '+' ], 
-                      [ 4, 5, 6, '-' ],
-                      [ 1, 2, 3, '*' ],
-                      [ 'C', 0, '=', '/'] 
-                    ];
+                         [ 4, 5, 6, '-' ],
+                         [ 1, 2, 3, '*' ],
+                         [ 'C', 0, '=', '/'] 
+                       ];
   String _currentOperand;
 
   @override
@@ -72,22 +72,19 @@ class _HomePageState extends State<HomePage> {
 
 
   void printValue( value ) {
-    print(value);
 
-    // if value is a number, and no operand, set currentTotal to value
-    // if operand, set operand to operand
-    // if value is a number and operand, set total to value
-    // if value1, 2, and operand , calculate
+    if( value == '=' ) {
+      return getTotal();
+    }
+    
     if( value is int ){
       if( _currentOperand == null ) {
         setState(() {
                   _value1 = int.parse(_value1.toString() + value.toString());
-                  print('value 1 ' + _value1.toString());
                 });
       } else {
         setState(() {
                   _value2 = int.parse(_value2.toString() + value.toString());
-                  print('value 2 ' + _value2.toString());
                 });
       }
 
@@ -109,6 +106,26 @@ class _HomePageState extends State<HomePage> {
               _value2 = 0;
             });
     }
+  }
+
+
+  getTotal() {
+    setState(() {
+          _totalValue = calculate(_value1, _currentOperand, _value2);
+          _value1     = _totalValue;
+          _value2     = 0;
+          _currentVal = _totalValue.toString();
+        });
+  }
+
+
+  reset() {
+    setState(() {
+          _value1     = 0;
+          _value2     = 0;
+          _totalValue = 0;
+          _currentVal = '0';
+        });
   }
 
 
