@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 class ButtonRow extends StatelessWidget {
 
   final List _buttons;
-  final calculate;
+  final printValue;
 
-  ButtonRow(this._buttons, this.calculate){
+  ButtonRow(this._buttons, this.printValue){
     print(_buttons);
   }
 
@@ -23,7 +23,7 @@ class ButtonRow extends StatelessWidget {
                     textColor: Colors.black,
                     color: Colors.grey[100],
                     onPressed: (){
-                      calculate(button.toString());
+                      printValue(button.toString());
                     },
                   ),
             );

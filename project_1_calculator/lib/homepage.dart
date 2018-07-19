@@ -14,12 +14,19 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
-  int totalValue = 0;
-  String currentCal = '';
-  List buttons = [ [ 7, 8, 9, '+' ], 
+  int    _totalValue = 0;
+  String _currentVal = '0';
+  List   _buttons = [ [ 7, 8, 9, '+' ], 
                    [ 4, 5, 6, '-' ],
                    [ 1, 2, 3, '*' ],
                    [ 'C', 0, '=', '/'] ];
+  Map    _operands = {
+    '+': true,
+    '-': true,
+    '*': true,
+    '/': true,
+  };
+  // String  _currentOperand = '';
 
   @override
     void initState() {
@@ -36,15 +43,15 @@ class _HomePageState extends State<HomePage> {
         ),
         body: Column(
           children: <Widget>[
-            Container( // Display Container
-              constraints: BoxConstraints.expand( // Creating a boxed container 
+            Container(
+              constraints: BoxConstraints.expand(
                 height: Theme.of(context).textTheme.display1.fontSize * 1.1 + 100.0,
               ),
-              alignment: Alignment.bottomRight, // Aligning the text to the bottom right of our display screen
-              color: Colors.white, // Seting the background color of the container
+              alignment: Alignment.bottomRight,
+              color: Colors.white,
               child: Text(
-                "0",
-                style: TextStyle( // Styling the text
+                _currentVal,
+                style: TextStyle(
                   fontSize: 50.0,
                   color: Colors.black
                 ),
@@ -53,8 +60,8 @@ class _HomePageState extends State<HomePage> {
             ),
 
             Column(
-              children: buttons.map( ( button ) {
-                return ButtonRow(button, calculate);
+              children: _buttons.map( ( button ) {
+                return ButtonRow(button, printValue);
               } ).toList(),
             ),
 
@@ -66,7 +73,22 @@ class _HomePageState extends State<HomePage> {
       );
     }
 
-  calculate( String value) {
+  void printValue( String value ) {
     print(value);
+
+    setState(() {
+      _currentVal = _currentVal == '0' && !_operands.containsKey(value)
+                        ? value + ''
+                        : _currentVal + value + '';
+
+    });
+    print(_currentVal);
+  }
+
+  calculate() {
+    List allValues = _currentVal.split(' ');
+    allValues.forEach( ( val ) {
+      
+    });
   }
 }
