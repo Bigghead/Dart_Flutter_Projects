@@ -17,9 +17,8 @@ class ButtonRow extends StatelessWidget {
               child: MaterialButton(
                     height: 110.0,
                     child: Text(button.toString(),
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24.0)),
-                    textColor: Colors.black,
-                    color: Colors.grey[100],
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24.0,),),
+                    textColor: Color(int.parse('#E2E5F1'.substring(1, 7), radix: 16) + 0xFF000000),
                     onPressed: (){
                       printValue(button);
                     },

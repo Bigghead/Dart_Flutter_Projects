@@ -41,29 +41,34 @@ class _HomePageState extends State<HomePage> {
         body: Column(
           children: <Widget>[
             Container(
-              constraints: BoxConstraints.expand(
-                height: Theme.of(context).textTheme.display1.fontSize * 1.1 + 100.0,
+              padding: EdgeInsets.only(bottom: 20.0, right: 10.0),
+              height: Theme.of(context).textTheme.display1.fontSize * 1.1 + 135.0,
+              decoration: BoxDecoration(
+                color: Color(int.parse('#6368C2'.substring(1, 7), radix: 16) + 0xFF000000)
               ),
               alignment: Alignment.bottomRight,
-              color: Colors.white,
               child: Text(
                 _currentVal,
                 style: TextStyle(
                   fontSize: 50.0,
-                  color: Colors.black
+                  color: Colors.white
                 ),
                 textAlign: TextAlign.right,
               ),
             ),
 
-            Column(
-              children: _buttons.map( ( button ) {
-                return ButtonRow(button, printValue);
-              } ).toList(),
-            ),
-
-            BottomAppBar(
-              child: Text(''),
+            Expanded(
+              child: Container(
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey),
+                  color: Color(int.parse('#8084d6'.substring(1, 7), radix: 16) + 0xFF000000)
+                ),
+                child: Column(
+                  children: _buttons.map( ( button ) {
+                      return Expanded( child: ButtonRow(button, printValue) );
+                    } ).toList(),
+                ),
+              )
             )
           ],
         )
